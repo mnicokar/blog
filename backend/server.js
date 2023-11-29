@@ -6,7 +6,7 @@ const BlogPost = require('./models/BlogPost');
 
 const app = express();
 const port = process.env.PORT || 3500;
-const DB_URI = 'mongodb+srv://gracejovanovic:gracie3@cluster0.elipkyo.mongodb.net/?retryWrites=true&w=majority';
+const DB_URI = env.DB_URI;
 const postsRoute = require('./routes/posts');
 
 app.use((req, res, next) => {
