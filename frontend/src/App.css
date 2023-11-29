@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html {
+  background-color: rgb(249, 202, 197);
+}
+
+.App {
+  margin: 0;
+  transition: background-color 0.3s;
+}
+.App .modal-open {
+  filter: blur(500px); /* Adjust the blur radius as needed */
+  transition: filter 0.3s ease-in-out;
+  background-color: red;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 55px;
+  z-index: 1000;
+  font-size: 20px;
+}
+.underline-box {
+  padding: 2px;
+  border-bottom: solid 2px black;
+}
+
+.title {
+  font-weight: bold;
+  flex-grow: 1;
+  text-align: center;
+  color: #333;
+  cursor: pointer;
+}
+
+.newPost {  
+  color: #333;
+  cursor: pointer;
+  padding-top: 10px;
+}
+
+/* .App.scrolled .header {
+  transform: translateY(-100%);
+} */
+
+.grid-container {
+  margin: 80px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  overflow-x: hidden;
+  outline: 5px solid black;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  outline: solid black 3px;
+  max-width: 100%;
+  margin: 20px;
+  height: auto;
+}
+
+.post img {
+  width: 100%;
+  height: auto;
+}
+
+.post-details {
+  margin-top: 18px;
+  flex: 1;
+  padding: 18px;
+}
+
+.post-date {
+  font-size: 14px;
+}
+
+.post-title {
+  font-size: 25px;
+}
+
+/* Styles for Post Details Page */
+.post-detail {
+  margin: 30px;
+  display: flexbox;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.post-detail-title {
+  font-size: large;
+
+}
+
+/* Modal Styles */
+.modal {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  position: fixed; /* or position: absolute; */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Adjust the z-index value as needed */
+}
+/* Apply blur effect to the body when modal is open */
+body.modal-open {
+  filter: blur(200px); /* Adjust the blur radius as needed */
+  transition: filter 0.3s ease-in-out;
+}
+
+.new-post-header {
+  font-size: 24px;
+  color: black;
+  margin-bottom: 12px;
+  font-weight: bold;
+  display: block;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-form label {
+  margin-bottom: 10px;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+  width: 200px;
+}
+
+.modal-form input, .modal-form textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.modal-form input:focus, .modal-form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgb(245, 161, 151);
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal-form button[type="submit"] {
+  background-color: rgb(249, 202, 197);
+  color: #080808;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-form button[type="submit"]:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal-close {
+  align-self: flex-end;
+  margin-left: auto;
+  padding: 10px;
+  font-size: 11px;
+}
+
+@keyframes bounceIn {
+  0% {
+      opacity: 0;
+      transform: scale(.3)
+  }
+
+  50% {
+      opacity: 1;
+      transform: scale(1.05)
+  }
+
+  70% {
+      transform: scale(.9)
+  }
+
+  100% {
+      transform: scale(1)
+  }
+}
+
+@keyframes bounceOut {
+  0% {
+      transform: scale(1)
+  }
+
+  25% {
+      transform: scale(.95)
+  }
+
+  50% {
+      opacity: 1;
+      transform: scale(1.1)
+  }
+
+  100% {
+      opacity: 0;
+      transform: scale(.3)
+  }
+}
+
+@media screen and (max-width: 432px) {
+  .mobile-hidden {
+      display:none
+  }
+}
+
+@media screen and (max-width: 432px) {
+  .subDesktop-hidden {
+      display:none
+  }
+}
+
+@media screen and (min-width: 433px) {
+  .desktop-hidden {
+      display:none
+  }
+}
+
