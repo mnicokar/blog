@@ -28,7 +28,7 @@ const EditPost = ({ post, onSave, onCancel }) => {
 
     try {
       const response = await axios.put(
-        `http://localhost:3500/posts/${post.id}`,
+        `http://localhost:3000/${post.id}`,
         formData
       );
       onSave(post.id, response.data);

@@ -5,8 +5,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Body = ({ posts = [], setPosts, isModalOpen, closeModal }) => {
-  console.log('isModalOpen in Body:', isModalOpen)
-
   const sortedPosts = Array.isArray(posts) ? [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)): [];
   const [selectedPost, setSelectedPost] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -14,9 +12,9 @@ const Body = ({ posts = [], setPosts, isModalOpen, closeModal }) => {
   const navigate = useNavigate();
 
   const handlePostClick = (post) => {
-    setSelectedPost(post);
-    navigate(`/posts/${post.id}`);
-
+    setSelectedPost(post.id);
+    navigate(`/${post.id}`);
+  
     const openEditMode = () => {
      setIsEditing(true);
     };
@@ -43,7 +41,7 @@ const Body = ({ posts = [], setPosts, isModalOpen, closeModal }) => {
 
   const handleDeleteClick = async (postId) => {
     try {
-      await axios.delete(`http://localhost:3500/posts/${postId}`);
+      await axios.delete(`http://localhost:3000/${postId}`);
       const updatedPosts = posts.filter((post) => post.id !== postId);
       setPosts(updatedPosts);
       setSelectedPost(null);
@@ -54,28 +52,35 @@ const Body = ({ posts = [], setPosts, isModalOpen, closeModal }) => {
 
   return (
     <div className={`grid-container ${isModalOpen ? 'modal-open' : ''}`}>
-      {sortedPosts.map((post) => (
-        <div key={post.id} className="post" onClick={() => handlePostClick(post)}>
-          <img className="post-image" 
+      {sortedPosts.length > 0 ? (
+        sortedPosts.map((post) => (
+          <div key={post.id} className="post" onClick={() => handlePostClick(post)}>
+            <img
+              className="post-image"
               src={post.imageUrl ? post.imageUrl : './assets/defaultImg.jpg'}
-              alt="" />
-          <div className="post-details">
-            <div className="post-date">{new Date(post.date).toLocaleDateString("en-US", {
-              year: "2-digit",
-              month: "2-digit",
-              day: "2-digit",
-            })}</div>
-            <div className="post-title">{post.title}</div>
-            <div className="post-content">{post.text}</div>
+              alt=""
+            />
+            <div className="post-details">
+              <div className="post-date">{new Date(post.date).toLocaleDateString("en-US", {
+                year: "2-digit",
+                month: "2-digit",
+                day: "2-digit",
+              })}</div>
+              <div className="post-title">{post.title}</div>
+              <div className="post-content">{post.text}</div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <div className="empty-posts-message">No posts available</div>
+      )}
 
       {selectedPost ? (
-        <PostDetail post={selectedPost} />
+        <PostDetail key={selectedPost.id} post={selectedPost} />
       ) : (
         isEditing ? (
           <EditPost
+            key={`edit-post-${selectedPost.id}`}
             postId={selectedPost?.id}  // Make sure to handle null case appropriately
             onSave={handleEditSave}
             onCancel={handleEditCancel}

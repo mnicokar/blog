@@ -9,22 +9,22 @@ const NewPost = ({ onSubmit, onCancel }) => {
   
   const [image, setImage] = useState(null);
 
-  const instance = axios.create({
-    baseURL: 'http://localhost:3000/posts' 
-  });
-
   const handleImageUpload = e => {
     setImage(e.target.files[0]);
   }
 
-  const handleSubmit = async e => {
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000/' 
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const formData = new FormData();
     formData.append('image', image);
 
     try {
-      const res = await instance.post('/posts', formData);
+      const res = await instance.post('/', formData);
       onSubmit({
         title,
         date,

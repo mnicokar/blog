@@ -6,8 +6,7 @@ import NewPost from './NewPost';
 
 function Header({ onNewPost }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log('isModalOpen in Header:', isModalOpen);
-
+  
   const openModal = () => {
     setIsModalOpen(true);
   };
