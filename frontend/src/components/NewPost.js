@@ -6,15 +6,14 @@ const NewPost = ({ onSubmit, onCancel }) => {
   const [date, setDate] = useState(''); 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
 
   const handleImageUpload = e => {
     setImage(e.target.files[0]);
   }
 
   const instance = axios.create({
-    baseURL: 'http://localhost:3000/' 
+    baseURL: 'http://localhost:3001/' 
   });
 
   const handleSubmit = async (e) => {
@@ -32,13 +31,13 @@ const NewPost = ({ onSubmit, onCancel }) => {
         imageUrl: res.data.path  
       });
     } catch (err) {
-      console.error(err);
+      console.error(err.response.data);
     }
   }
 
   return (
     <form
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit} encType="multipart/form-data">
       <input
         type="text" required
         placeholder="Title"
@@ -58,6 +57,7 @@ const NewPost = ({ onSubmit, onCancel }) => {
         type="file" required
         placeholder="Add a pic"
         onChange={handleImageUpload}
+        name="image"
         />
       <button type="submit">Create Post</button>
     </form>

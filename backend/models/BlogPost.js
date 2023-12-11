@@ -11,8 +11,8 @@ const blogPostSchema = new mongoose.Schema({
       year: "2-digit",
     }),
   },
-  image: { type: String },
-  content: { type: String, required: true },
+  imageUrl: { type: String },
+  content: { type: String },
 });
 
 const BlogPost = mongoose.model('BlogPost', blogPostSchema);

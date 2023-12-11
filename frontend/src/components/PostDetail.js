@@ -1,8 +1,9 @@
 import React from 'react';
 
 const PostDetail = ({ post }) => {
+  console.log(post);
   if (!post) {
-    return null;
+    return console.log('No post found');
   }
 
   return (

@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Main/>} />
-      <Route path={"/post"} element={<PostDetail />} />
+      <Route path="/:postId" element={<PostDetail />} />
     </Routes>
     );
   };

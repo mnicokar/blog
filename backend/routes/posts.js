@@ -8,8 +8,10 @@ const {
   deleteBlogPost,
 } = require('../controllers/postController');
 
+router.route('/').post(upload.single('image'), createBlogPost);
 router.route('/').get(getBlogPosts).post(createBlogPost);
 
-router.route('/:id').get(getBlogPost).patch(updateBlogPost).delete(deleteBlogPost);
+router.route('/:postId').get(getBlogPost).patch(updateBlogPost).delete(deleteBlogPost);
+
 
 module.exports = router;

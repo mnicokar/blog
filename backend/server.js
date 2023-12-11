@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const multer = require('multer');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const { post } = require('./routes/posts');
@@ -18,7 +19,7 @@ app.use(express.static('uploads'));
 
 // Routes
 app.use('/', require('./routes/posts'));
-app.use('/:id', require('./routes/posts'));
+app.post('/', upload.single('image'), require('./routes/posts'));
 
 app.get('/', async (req, res) => {
   const posts = await BlogPost.find({});

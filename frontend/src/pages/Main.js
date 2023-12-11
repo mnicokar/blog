@@ -38,7 +38,7 @@ function Main() {
       console.error('Error adding new post:', error);
     }
   };
-
+  
   return (
       <div className={`App ${isModalOpen ? 'modal-open' : ''}`}>
       <Header onNewPost={addNewPost} openModal = {openModal}/>

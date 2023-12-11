@@ -11,6 +11,7 @@ const getBlogPosts = asyncHandler(async (req, res) => {
 // Fetch a single post
 const getBlogPost = asyncHandler(async (req, res) => {
     const { id: _id } = req.params;
+    console.log("id:", _id);
     const post = await BlogPost.findById(_id);
     if (!post) {
         res.status(404).json({ message: "Post not found" });
@@ -20,7 +21,13 @@ const getBlogPost = asyncHandler(async (req, res) => {
 
 // Create a new post
 const createBlogPost = asyncHandler(async (req, res) => {
-    const post = await BlogPost.create(req.body);
+    const { title, date, content } = req.body;
+    const imageUrl = req.file.path;
+    console.log("Title:", title);
+    console.log("Date:", date);
+    console.log("Content:", content);
+    console.log("ImageUrl:", imageUrl);
+    const post = await BlogPost.create({ title, date, content, imageUrl });
     res.status(200).json(post);
 });
 
