@@ -10,9 +10,9 @@ const getBlogPosts = asyncHandler(async (req, res) => {
 
 // Fetch a single post
 const getBlogPost = asyncHandler(async (req, res) => {
-    const { id: _id } = req.params;
-    console.log("id:", _id);
-    const post = await BlogPost.findById(_id);
+    const postID = req.params.id;
+    console.log("id:", postID);
+    const post = await BlogPost.findById(postID);
     if (!post) {
         res.status(404).json({ message: "Post not found" });
     }

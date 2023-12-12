@@ -44,6 +44,7 @@ function Main() {
       <Header onNewPost={addNewPost} openModal = {openModal}/>
       <Body posts={posts} setPosts={setPosts} 
       isModalOpen={isModalOpen} closeModal={closeModal}/>
+      
       </div>
   );
 }

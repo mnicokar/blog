@@ -6,15 +6,16 @@ import { useNavigate } from 'react-router-dom';
 
 const Body = ({ posts = [], setPosts, isModalOpen, closeModal }) => {
   const sortedPosts = Array.isArray(posts) ? [...posts].sort((a, b) => new Date(b.date) - new Date(a.date)) : [];
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState({});
   const [isEditing, setIsEditing] = useState(false);
 
   const navigate = useNavigate();
 
   const handlePostClick = (post) => {
-    setSelectedPost(post._id);
+    setSelectedPost(post);
+    console.log("SELECTED POST", selectedPost)
     navigate(`/${post._id}`);
-    console.log('Post clicked:', post._id);
+    //console.log('Post clicked:', post._id);
 
     const openEditMode = () => {
       setIsEditing(true);
